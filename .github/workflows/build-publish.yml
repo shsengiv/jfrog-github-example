@@ -26,6 +26,10 @@ jobs:
                 JF_PROJECT: ${{ vars.JF_PROJECT }}
               with:
                   oidc-provider-name: vigneshs-oidc
+            - name: Verify OIDC Outputs
+              run: |
+                echo "OIDC User: ${{ steps.setup-cli.outputs.oidc-user }}"
+                echo "OIDC Token available: ${{ steps.setup-cli.outputs.oidc-token != '' }}" 
 
             - name: Checkout the repository
               uses: actions/checkout@v4
