@@ -80,12 +80,12 @@ jobs:
               run: |  
                 docker buildx ls
                 jf docker --version
-                jf docker build --tag ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }} --platform linux/amd64,linux/arm64 --metadata-file  metadata.json --push .
+                jf docker build --tag hts2-codeninjas-proj-docker-local.jfrog.io/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }} --platform linux/amd64,linux/arm64 --metadata-file  metadata.json --push .
                 
             - name: docker scan
               run: |  
-                 jf docker pull ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-                 jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}   
+                 jf docker pull hts2-codeninjas-proj-docker-local.jfrog.io/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+                 jf docker scan hts2-codeninjas-proj-docker-local.jfrog.io/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}   
             #- name: docker build
             #  run: |  
             #    jf docker build --tag ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}-amd64 --platform  linux/amd64 --load .
@@ -113,7 +113,7 @@ jobs:
                  echo "----------------"
                  digest=$(cat metadata.json | jq '.["containerimage.digest"]')
                  echo "digest=$digest"
-                 echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@$digest" > metadata.json
+                 echo "hts2-codeninjas-proj-docker-local.jfrog.io/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@$digest" > metadata.json
                  jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
 
             - name: publish build info
