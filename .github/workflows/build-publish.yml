@@ -14,7 +14,7 @@ jobs:
         env:
           DOCKER_REPO: 'codeninjas-proj-docker-local'
           IMAGE_NAME: 'my-very-cool-image:${{ github.run_number }}'
-          JF_URL: https://${{ vars.JF_URL }}/
+          JF_URL: https://${{ vars.JF_URL }}
           DOCKER_CLI_EXPERIMENTAL: enabled
         steps:
             # Use the specific setup-cli branch
@@ -22,7 +22,7 @@ jobs:
               uses: jfrog/setup-jfrog-cli@v4
               id: setup-cli
               env:
-                JF_URL: https://${{ vars.JF_URL }}/
+                JF_URL: https://${{ vars.JF_URL }}
                 JF_PROJECT: ${{ vars.JF_PROJECT }}
               with:
                   oidc-provider-name: vigneshs-oidc
