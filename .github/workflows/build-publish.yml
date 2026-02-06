@@ -14,7 +14,6 @@ jobs:
         env:
           DOCKER_REPO: 'codeninjas-proj-docker-local'
           IMAGE_NAME: 'my-very-cool-image:${{ github.run_number }}'
-          JF_URL: https://hts2.jfrog.io
         steps:
             # Use the specific setup-cli branch
             - name: Setup JFrog CLI
