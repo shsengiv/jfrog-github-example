@@ -42,6 +42,7 @@ jobs:
           # [Mandatory]
           # JFrog platform URL
           JF_URL: https://hts2.jfrog.io
+          JF_INCLUDE_ALL_VULNERABILITIES: true
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service
