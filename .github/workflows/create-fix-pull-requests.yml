@@ -1,0 +1,23 @@
+name: "Frogbot Scan PR"
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: write
+
+jobs:
+  scan-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jfrog/frogbot@v3
+        env:
+          JF_URL: "https://hts2.jfrog.io"
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_INCLUDE_ALL_VULNERABILITIES: "true"
+          JF_FAIL: "false"
