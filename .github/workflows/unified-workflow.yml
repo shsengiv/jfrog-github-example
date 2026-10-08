@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 jobs:
-  # Job 1: Runs when a Pull Request is opened or updated
+  # Job 1: Runs when a Pull Request is opened or updated.
   scan-pull-request:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
