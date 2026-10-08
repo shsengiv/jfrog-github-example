@@ -31,7 +31,7 @@ jobs:
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JF_PROJECT: ${{ vars.JF_PROJECT }}
-          # JF_INCLUDE_ALL_VULNERABILITIES: "true"
+          JF_INCLUDE_ALL_VULNERABILITIES: "true"
 
   # Job 2: Runs automatically when code is pushed/merged to the main branch
   create-fix-pull-requests:
@@ -51,5 +51,4 @@ jobs:
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JF_PROJECT: ${{ vars.JF_PROJECT }}
-          JF_WATCHES: "DCP-test-watch"
-          # JF_INCLUDE_ALL_VULNERABILITIES: "true"
+          JF_INCLUDE_ALL_VULNERABILITIES: "true"
