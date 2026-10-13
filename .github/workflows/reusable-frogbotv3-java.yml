@@ -72,6 +72,8 @@ jobs:
 
       - name: Run Frogbot
         uses: jfrog/frogbot@v3
+        with:
+          cmd: "scan-pull-request"
         env:
           JF_URL: ${{ secrets.JF_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
