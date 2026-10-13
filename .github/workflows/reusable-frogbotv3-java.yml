@@ -1,0 +1,86 @@
+name: reusable-frogbotv3-java
+
+on:
+  workflow_call:
+    inputs:
+      working_directory:
+        type: string
+        required: false
+        default: "."
+      base_branch:
+        type: string
+        required: false
+        default: "main"
+      upload_sbom_to_github:
+        type: boolean
+        required: false
+        default: false
+      debug_cli:
+        type: boolean
+        required: false
+        default: false
+      always_succeed:
+        type: boolean
+        required: false
+        default: true
+      avoid_extra_messages:
+        type: boolean
+        required: false
+        default: true
+      minimum_severity_allowed:
+        type: string
+        required: false
+        default: "High"
+      jf_watches:
+        description: "Set Frogbot to use Xray Watches <watch-1>,<watch-2>...<watch-n>"
+        type: string
+        required: false
+        default: "DCP-WATCH-frogbot-pr"
+      jf_include_all_vulnerabilities:
+        description: "Displays all vulnerabilities, including those present before the pull request."
+        type: boolean
+        default: true
+    secrets:
+      JF_URL:
+        required: true
+      JF_ACCESS_TOKEN:
+        required: true
+      ARTIFACTORY_USERNAME:
+        required: false
+      ARTIFACTORY_PASSWORD:
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  security-events: write
+
+jobs:
+  frogbot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_INCLUDE_ALL_VULNERABILITIES: true
+
+      - name: Run Frogbot
+        uses: jfrog/frogbot@v3
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_INCLUDE_ALL_VULNERABILITIES: true
+          JFROG_CLI_LOG_LEVEL: "DEBUG"
+
+          # OMITTED: JF_WATCHES is intentionally left out to mirror the customer's missing mapping
+
+          JF_UPLOAD_RESULTS_TO_GITHUB: "FALSE"
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_GIT_PROVIDER: github
+          JF_GIT_REPO: ${{ github.event.repository.name }}
