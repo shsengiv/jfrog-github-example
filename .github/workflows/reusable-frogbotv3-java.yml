@@ -76,6 +76,7 @@ jobs:
           JF_URL: ${{ secrets.JF_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
           JF_INCLUDE_ALL_VULNERABILITIES: true
+          JF_WATCHES: "DCP-WATCH-frogbot-pr"
           JFROG_CLI_LOG_LEVEL: "DEBUG"
 
           # OMITTED: JF_WATCHES is intentionally left out to mirror the customer's missing mapping
