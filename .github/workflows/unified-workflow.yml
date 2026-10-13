@@ -16,11 +16,10 @@ permissions:
 
 jobs:
   frogbot:
-    uses: ./.github/workflows/frogbotv3-java.yml
+    uses: ./.github/workflows/reusable-frogbotv3-java.yml
     with:
       base_branch: "main"
       always_succeed: false
-
     secrets:
       JF_URL: ${{ secrets.JF_URL }}
       JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
